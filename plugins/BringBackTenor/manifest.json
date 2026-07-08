@@ -1,0 +1,11 @@
+{
+  "name": "BringBackTenor",
+  "description": "Revive the dead tenor gif search",
+  "authors": [
+    { "name": "Livie", "id": "755950362342457384" }
+  ],
+  "main": "src/index.tsx",
+  "vendetta": {
+    "icon": "ic_image_24px"
+  }
+}
