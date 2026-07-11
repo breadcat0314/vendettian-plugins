@@ -152,15 +152,14 @@ export default {
             return;
         }
 
-        const ProviderConfig = findByProps("getProviderForAPIRequest");
-        if (ProviderConfig) {
-            patches.push(
-                instead("getProviderForAPIRequest", ProviderConfig, () => "tenor"),
-            );
-        }
+        const httpModule = findByProps("get", "post", "put", "patch", "delete");
+        if (!httpModule?.get) {
+    console.warn("[BringBackTenor] HTTP module not found, plugin disabled");
+    return;
+    }
 
         patches.push(
-            instead("get", httpModule.HTTP, (args: any[], orig: Function) => {
+            instead("get", httpModule, (args: any[], orig: Function) => {
                 const opts = args[0];
                 if (!opts?.url || typeof opts.url !== "string") return orig(...args);
 
